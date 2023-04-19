@@ -1,6 +1,5 @@
 import { database, set, get, ref } from "./firebase.js";
 
-
 const formFields = document.querySelector(".form-fields");
 var inputCounter = 0;
 var addBtn = document.querySelector("#add-field");

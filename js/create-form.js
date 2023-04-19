@@ -1,9 +1,8 @@
-import {database, set, get, ref} from "./firebase.js";
+import { database, set, get, ref } from "./firebase.js";
 
-// TODO: Create a function which checks available ID from database and updates it accordingly
+
 const formFields = document.querySelector(".form-fields");
 var inputCounter = 0;
-    // ! Buttons
 var addBtn = document.querySelector("#add-field");
 var finalizeBtn = document.querySelector("#finalize-form");
 

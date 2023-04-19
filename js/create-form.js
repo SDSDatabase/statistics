@@ -1,7 +1,6 @@
-// import {database, set, get} from "./firebase.js";
+import {database, set, get, ref} from "./firebase.js";
 
 // TODO: Create a function which checks available ID from database and updates it accordingly
-// var uniqueID = 0; // ! ID used to separate different questions
 const formFields = document.querySelector(".form-fields");
 var inputCounter = 0;
     // ! Buttons
@@ -26,6 +25,7 @@ function AddField() {
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
+    deleteButton.setAttribute('class', 'delete-btn')
     deleteButton.addEventListener("click", () => {
       label.remove();
       input.remove();
@@ -33,6 +33,7 @@ function AddField() {
     });
 
     const field = document.createElement("div");
+    field.setAttribute('class', "questions");
     field.appendChild(label);
     field.appendChild(input);
     field.appendChild(deleteButton);
@@ -43,7 +44,36 @@ function AddField() {
 function FinalizeForm(){
     document.querySelector("form").classList.add("hidden");
     document.querySelector("#view-form").classList.remove("hidden");
-    console.log(formFields.innerHTML);
+    let buttons = document.querySelectorAll(".delete-btn");
+    while (buttons.length > 0) {
+      buttons[0].remove();
+      buttons = document.querySelectorAll(".delete-btn");
+    }
+    let formDiv = formFields.innerHTML;
+    AddToFirebaseDatabase(formDiv);
+}
+
+function AddToFirebaseDatabase(value){
+    let uniqueID = 0;
+    let idExists = true;
+
+    while(idExists){
+        get(ref(database, "Forms/" + uniqueID))
+        .then((snapshot) =>{
+            if(!snapshot.exists()){
+                // ! Condition: A unique ID has not been taken
+                idExists = false;
+                set(ref(database, "Forms/" + uniqueID), {
+                    ID: uniqueID,
+                    // TODO: Add a name input to add the name of the form
+                    Form: value
+                })
+            } else {
+                // ! Condition: A unique ID has already been taken
+                uniqueID++;
+            }
+        })
+    }
 }
 
 addBtn.addEventListener('click', AddField);

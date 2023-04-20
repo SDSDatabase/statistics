@@ -48,7 +48,8 @@ function FinalizeForm(){
       buttons = document.querySelectorAll(".delete-btn");
     }
     let formDiv = formFields.innerHTML;
-    AddToFirebaseDatabase(formDiv);
+    console.log(formDiv);
+    // AddToFirebaseDatabase(formDiv);
 }
 
 function AddToFirebaseDatabase(value){

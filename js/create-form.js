@@ -1,4 +1,4 @@
-import { database, set, get, ref } from "./firebase.js";
+import { database, set, ref } from "./firebase.js";
 
 const formFields = document.querySelector(".form-fields");
 var inputCounter = 0;

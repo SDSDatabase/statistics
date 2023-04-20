@@ -49,30 +49,16 @@ function FinalizeForm(){
     }
     let formDiv = formFields.innerHTML;
     console.log(formDiv);
-    // AddToFirebaseDatabase(formDiv);
+    AddToFirebaseDatabase(formDiv);
 }
 
 function AddToFirebaseDatabase(value){
-    let uniqueID = 0;
-    let idExists = true;
+    let uniqueID = "Everyone's Phone Number";
 
-    while(idExists){
-        get(ref(database, "Forms/" + uniqueID))
-        .then((snapshot) =>{
-            if(!snapshot.exists()){
-                // ! Condition: A unique ID has not been taken
-                idExists = false;
-                set(ref(database, "Forms/" + uniqueID), {
-                    ID: uniqueID,
-                    // TODO: Add a name input to add the name of the form
-                    Form: value
-                })
-            } else {
-                // ! Condition: A unique ID has already been taken
-                uniqueID++;
-            }
-        })
-    }
+    set(ref(database, "Forms/" + uniqueID), {
+        ID: uniqueID,
+        Form: value
+    });
 }
 
 addBtn.addEventListener('click', AddField);

@@ -26,8 +26,10 @@ let fieldCount = 1;
 addFieldButton.addEventListener("click", () => {
   const field = document.createElement("div");
   field.innerHTML = `
+        <br><br>
         <label for="field-${fieldCount}">Field ${fieldCount}:</label>
-        <input type="text" id="field-${fieldCount}" name="field-${fieldCount}">
+        <input type="text" style="width: 30%" id="field-${fieldCount}" name="field-${fieldCount}">
+        <p>Please enter the question you wish to ask!</p>
         <br><br>
         <label for="field-${fieldCount}-type">Type:</label>
         <select id="field-${fieldCount}-type" name="field-${fieldCount}-type">
@@ -37,21 +39,24 @@ addFieldButton.addEventListener("click", () => {
         </select>
         <br><br>
         <label for="field-${fieldCount}-value">Value:</label>
-        <input type="text" id="field-${fieldCount}-value" name="field-${fieldCount}-value">
+        <input type="text" style="width: 30%" id="field-${fieldCount}-value" name="field-${fieldCount}-value">
+        <p>Please enter the value this question will take!</p>
         <br><br>
     `;
+
+    // field-num refers to question
+    // field-num-type refers to the type of value it will store
+    // field-num-value refers to the value based on the type it is allowed to store
   form.insertBefore(field, addFieldButton);
   fieldCount++;
 });
 
-document
-  .getElementById("create-document")
-  .addEventListener("click", (event) => {
+document.getElementById("create-document").addEventListener("click", (event) => {
     event.preventDefault();
 
     // Get the input values
-    const collectionName = collectionNameInput.value.trim();
-    const documentName = documentNameInput.value.trim();
+    const collectionName = collectionNameInput.value.trim() + "-collection";
+    const documentName = documentNameInput.value.trim() + " Questionaire";
 
     // Check that the input values are not empty
     if (!collectionName || !documentName) {
@@ -62,30 +67,26 @@ document
     // Create an object to hold the fields and their values
     const fields = {};
     for (let i = 1; i < fieldCount; i++) {
-      const fieldName = document.getElementById(`field-${i}`).value.trim();
-      const fieldType = document.getElementById(`field-${i}-type`).value.trim();
-      const fieldValue = document
-        .getElementById(`field-${i}-value`)
-        .value.trim();
-      if (fieldName && fieldValue) {
-        switch (fieldType) {
-          case "number":
-            fields[fieldName] = Number(fieldValue);
-            break;
-          case "boolean":
-            fields[fieldName] = fieldValue.toLowerCase() === "true";
-            break;
-          default:
-            fields[fieldName] = fieldValue;
+        const fieldName = i + ". " + document.getElementById(`field-${i}`).value.trim();
+    //   const fieldType = document.getElementById(`field-${i}-type`).value.trim();
+        const fieldType = "string";
+        const fieldValue = document.getElementById(`field-${i}-value`).value.trim();
+        if (fieldName && fieldValue) {
+            switch (fieldType) {
+            case "number":
+                fields[fieldName] = Number(fieldValue);
+                break;
+            case "boolean":
+                fields[fieldName] = fieldValue.toLowerCase() === "true";
+                break;
+            default:
+                fields[fieldName] = fieldValue;
+            }
         }
-      }
     }
 
     // Add the document to the collection
-    db.collection(collectionName)
-      .doc(documentName)
-      .set(fields)
-      .then(() => {
+    db.collection(collectionName).doc(documentName).set(fields).then(() => {
         console.log("Document added to collection successfully");
       })
       .catch((error) => {

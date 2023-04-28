@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
 import { getDatabase, set, get, update, remove, ref, child } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/8.3.3/firebase-firestore.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -16,10 +17,12 @@ messagingSenderId: "168068170143",
 appId: "1:168068170143:web:6676606706ba6b40f67daa"
 };
 
-const app = initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
 // ! Realtime Database
 const firebaseDatabase = getDatabase();
-export{firebaseDatabase, set, get, update, remove, ref, child}
+export{firebaseDatabase, set, get, update, remove, ref, child};
 
-
+// ! Firestore Database
+const firestoreDatabase = getFirestore();
+export {firestoreDatabase, app};

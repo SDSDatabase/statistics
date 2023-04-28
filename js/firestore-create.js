@@ -69,6 +69,52 @@ document.getElementById("create-document").addEventListener("click", (event) => 
         }
     }
 
+
+    const collectionDB = db.collection('information-list');
+    var collection_counter;
+
+    collectionDB.doc("collection-count").get()
+      .then((docSnapshot) => {
+        if (!docSnapshot.exists) {
+          collectionDB
+            .doc("collection-count")
+            .set({
+              "Number of collection" : 0
+            })
+            .then(() => console.log("Collection created successfully"))
+            .catch((error) =>
+              console.error("Error creating collection:", error)
+            );
+        } else {
+          const docData = docSnapshot.data();
+          if (Object.keys(docData).length === 0 && docData.constructor === Object) {
+            // If the fields are empty, set the initial values.
+            collectionDB
+              .doc("collection-count")
+              .set({
+                "Number of collection": 0,
+              })
+              .then(() => {
+                console.log("Document set successfully");
+              })
+              .catch((error) => {
+                console.error("Error setting document:", error);
+              });
+          } else {
+            collection_counter = docSnapshot.get("Number of collection");
+            console.log(collection_counter);
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("Error checking collection:", error)
+      });
+    
+    // const collection_object = {};
+
+    // collection_object["Number of collection"] = collection_counter;
+    // db.collection('information-list').doc('collection-list').set(collectionName);
+
     // ! insert(object).toCollection(Database)
     db.collection(collectionName).doc(documentName).set(fields).then(() => {
         console.log("Document added to collection successfully");

@@ -1,7 +1,19 @@
-import { firebaseDatabase, app } from "./firebase";
+const firebaseConfig = {
+  apiKey: "AIzaSyBXpx8bNix8yUzLTRu_P-_N5wdt3jllTuM",
+  authDomain: "statistics-1846f.firebaseapp.com",
+  databaseURL:
+    "https://statistics-1846f-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "statistics-1846f",
+  storageBucket: "statistics-1846f.appspot.com",
+  messagingSenderId: "168068170143",
+  appId: "1:168068170143:web:6676606706ba6b40f67daa",
+};
+firebase.initializeApp(firebaseConfig);
 
-const database = app.firestore();
+// Get a reference to the Firestore database
+const db = firebase.firestore();
 
+// Get references to the form elements
 const collectionNameInput = document.getElementById("collection-name");
 const documentNameInput = document.getElementById("document-name");
 const form = document.querySelector("form");

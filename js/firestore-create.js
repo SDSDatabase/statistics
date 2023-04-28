@@ -46,34 +46,113 @@ addFieldButton.addEventListener("click", () => {
 
 // ! createDocumentBtn.isClicked()
 document.getElementById("create-document").addEventListener("click", (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    // ! get(input_values)
-    const collectionName = collectionNameInput.value.trim() + "-collection";
-    const documentName = documentNameInput.value.trim() + "-questionaire";
+  // ! get(input_values)
+  const collectionName = collectionNameInput.value.trim() + "-collection";
+  const documentName = documentNameInput.value.trim() + "-questionaire";
 
-    // ! !isEmpty(input_values) 
-    if (!collectionName || !documentName) {
-      alert("Please enter a collection name and document name");
-      return;
+  // ! !isEmpty(input_values)
+  if (!collectionName || !documentName) {
+    alert("Please enter a collection name and document name");
+    return;
+  }
+
+  // ! Create an object; Holding each's field and value
+  const fields = {};
+  fields["Number of questions"] = Number(fieldCount);
+  for (let i = 0; i < fieldCount; i++) {
+    const fieldName =
+      i + 1 + ". " + document.getElementById(`field-${i}`).value.trim();
+    const fieldValue = document.getElementById(`field-${i}-value`).value.trim();
+    if (fieldName && fieldValue) {
+      fields[fieldName] = fieldValue;
     }
+  }
 
-    // ! Create an object; Holding each's field and value
-    const fields = {};
-    fields["Number of questions"] = Number(fieldCount);
-    for (let i = 0; i < fieldCount; i++) {
-        const fieldName = (i+1) + ". " + document.getElementById(`field-${i}`).value.trim();
-        const fieldValue = document.getElementById(`field-${i}-value`).value.trim();
-        if (fieldName && fieldValue) {
-            fields[fieldName] = fieldValue;
+  const collectionDB = db.collection("information-list");
+  const collection_object = {};
+  var collection_counter = 0;
+
+  // ! collection-count.function()
+  collectionDB.doc("collection-count").get()
+    .then((docSnapshot) => {
+      if (!docSnapshot.exists) {
+        collectionDB.doc("collection-count")
+          .set({
+            "Number of collection": 0,
+          })
+          .then(() => {
+            console.log("Collection 'collection-count' created successfully");
+          })
+          .catch((error) => {
+          console.error("Error creating collection:", error);
+          });
+      } else {
+        let docData = docSnapshot.data();
+        if (Object.keys(docData).length === 0 && docData.constructor === Object) {
+          collectionDB.doc("collection-count")
+            .set({
+              "Number of collection": 0
+            })
+            .then(() => {
+              console.log("Document set successfully");
+            })
+            .catch((error) => {
+              console.error("Error setting document:", error);
+            });
+        } else {
+          // collection_counter += docSnapshot.get("Number of collection");
+          // collectionDB.doc("collection-count").set({
+          //   "Number of collection": collection_counter
+          // });
         }
-    }
+      }
+    })
+    .catch((error) => {
+      console.error("Error checking collection:", error);
+    });
 
-    // ! insert(object).toCollection(Database)
-    db.collection(collectionName).doc(documentName).set(fields).then(() => {
-        console.log("Document added to collection successfully");
-      })
-      .catch((error) => {
-        console.error("Error adding document to collection: ", error);
-      });
-  });
+    // ! collection-name.function()
+    collectionDB.doc('collection-name').get()
+    .then((docSnapshot) => {
+      if (!docSnapshot.exists){
+        collectionDB.doc('collection-name')
+        .set({
+          "Collection-0" : "0-collection"
+        })
+        .then(() =>{
+          console.log("Collection 'collection-name' created successfully");
+        })
+        .catch((error) => {
+          console.error("Error creating collection:", error);
+        })
+      } else {
+        let docData = docSnapshot.data();
+        if (Object.keys(docData).length === 0 && docData.constructor === Object) {
+          collectionDB.doc('collection-name')
+          .set({
+            "Collection-0" : "0-collection"
+          })
+          .then(() =>{
+            console.log("Document set successfully");
+          })
+          .catch((error) =>{
+            console.error("Error setting document:", error);
+          });
+        } else {
+          // TODO: Enter new collection name into the database
+        }
+      }
+    })
+
+  // ! insert(object).toCollection(Database)
+  db.collection(collectionName).doc(documentName)
+    .set(fields)
+    .then(() => {
+      console.log("Document added to collection successfully");
+    })
+    .catch((error) => {
+      console.error("Error adding document to collection: ", error);
+    });
+});

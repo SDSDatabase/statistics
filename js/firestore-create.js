@@ -1,3 +1,6 @@
+import "https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js";
+import "https://www.gstatic.com/firebasejs/8.3.3/firebase-firestore.js"
+
 const firebaseConfig = {
   apiKey: "AIzaSyBXpx8bNix8yUzLTRu_P-_N5wdt3jllTuM",
   authDomain: "statistics-1846f.firebaseapp.com",

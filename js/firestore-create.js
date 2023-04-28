@@ -13,7 +13,7 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-// Get a reference to the Firestore database
+// ! getReference(fireStore_database)
 const db = firebase.firestore();
 
 // ! getReferences(form_elements)
@@ -23,6 +23,7 @@ const form = document.querySelector("form");
 const addFieldButton = document.getElementById("add-field");
 let fieldCount = 0;
 
+// ! addFieldBtn.isClicked()
 addFieldButton.addEventListener("click", () => {
   const field = document.createElement("div");
   field.innerHTML = `
@@ -39,13 +40,11 @@ addFieldButton.addEventListener("click", () => {
         <p>Please enter the value this question will take!</p>
         <br><br>
     `;
-
-    // ! field-num refers to question
-    // ! field-num-value refers to the value based on the type it is allowed to store
   form.insertBefore(field, addFieldButton);
   fieldCount++;
 });
 
+// ! createDocumentBtn.isClicked()
 document.getElementById("create-document").addEventListener("click", (event) => {
     event.preventDefault();
 

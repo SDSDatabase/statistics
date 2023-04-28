@@ -16,37 +16,32 @@ firebase.initializeApp(firebaseConfig);
 // Get a reference to the Firestore database
 const db = firebase.firestore();
 
-// Get references to the form elements
+// ! getReferences(form_elements)
 const collectionNameInput = document.getElementById("collection-name");
 const documentNameInput = document.getElementById("document-name");
 const form = document.querySelector("form");
 const addFieldButton = document.getElementById("add-field");
-let fieldCount = 1;
+let fieldCount = 0;
 
 addFieldButton.addEventListener("click", () => {
   const field = document.createElement("div");
   field.innerHTML = `
         <br><br>
-        <label for="field-${fieldCount}">Field ${fieldCount}:</label>
+        <label for="field-${fieldCount}">Field ${fieldCount + 1}:</label>
         <input type="text" style="width: 30%" id="field-${fieldCount}" name="field-${fieldCount}">
         <p>Please enter the question you wish to ask!</p>
         <br><br>
-        <label for="field-${fieldCount}-type">Type:</label>
-        <select id="field-${fieldCount}-type" name="field-${fieldCount}-type">
+        <label for="field-${fieldCount}-value">Value:</label>
+        <select id="field-${fieldCount}-value" name="field-${fieldCount}-type">
             <option value="string">Text</option>
             <option value="number">Number</option>
-            <option value="boolean">True/False</option>
         </select>
-        <br><br>
-        <label for="field-${fieldCount}-value">Value:</label>
-        <input type="text" style="width: 30%" id="field-${fieldCount}-value" name="field-${fieldCount}-value">
         <p>Please enter the value this question will take!</p>
         <br><br>
     `;
 
-    // field-num refers to question
-    // field-num-type refers to the type of value it will store
-    // field-num-value refers to the value based on the type it is allowed to store
+    // ! field-num refers to question
+    // ! field-num-value refers to the value based on the type it is allowed to store
   form.insertBefore(field, addFieldButton);
   fieldCount++;
 });
@@ -54,38 +49,28 @@ addFieldButton.addEventListener("click", () => {
 document.getElementById("create-document").addEventListener("click", (event) => {
     event.preventDefault();
 
-    // Get the input values
+    // ! get(input_values)
     const collectionName = collectionNameInput.value.trim() + "-collection";
-    const documentName = documentNameInput.value.trim() + " Questionaire";
+    const documentName = documentNameInput.value.trim() + "-questionaire";
 
-    // Check that the input values are not empty
+    // ! !isEmpty(input_values) 
     if (!collectionName || !documentName) {
       alert("Please enter a collection name and document name");
       return;
     }
 
-    // Create an object to hold the fields and their values
+    // ! Create an object; Holding each's field and value
     const fields = {};
-    for (let i = 1; i < fieldCount; i++) {
-        const fieldName = i + ". " + document.getElementById(`field-${i}`).value.trim();
-    //   const fieldType = document.getElementById(`field-${i}-type`).value.trim();
-        const fieldType = "string";
+    fields["Number of questions"] = Number(fieldCount);
+    for (let i = 0; i < fieldCount; i++) {
+        const fieldName = (i+1) + ". " + document.getElementById(`field-${i}`).value.trim();
         const fieldValue = document.getElementById(`field-${i}-value`).value.trim();
         if (fieldName && fieldValue) {
-            switch (fieldType) {
-            case "number":
-                fields[fieldName] = Number(fieldValue);
-                break;
-            case "boolean":
-                fields[fieldName] = fieldValue.toLowerCase() === "true";
-                break;
-            default:
-                fields[fieldName] = fieldValue;
-            }
+            fields[fieldName] = fieldValue;
         }
     }
 
-    // Add the document to the collection
+    // ! insert(object).toCollection(Database)
     db.collection(collectionName).doc(documentName).set(fields).then(() => {
         console.log("Document added to collection successfully");
       })

@@ -17,8 +17,7 @@ messagingSenderId: "168068170143",
 appId: "1:168068170143:web:6676606706ba6b40f67daa"
 };
 
-const app = initializeApp(firebaseConfig);
-
+const app = firebase.initializeApp(firebaseConfig);
 
 // ! Realtime Database
 const firebaseDatabase = getDatabase();
@@ -26,4 +25,4 @@ export{firebaseDatabase, set, get, update, remove, ref, child};
 
 // ! Firestore Database
 const firestoreDatabase = getFirestore();
-export {firestoreDatabase};
+export {firestoreDatabase, app};

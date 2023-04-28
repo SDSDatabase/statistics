@@ -72,7 +72,7 @@ document.getElementById("create-document").addEventListener("click", (event) => 
 
   const collectionDB = db.collection("information-list");
   const collection_object = {};
-  var collection_counter;
+  var collection_counter = 0;
 
   // ! collection-count.function()
   collectionDB.doc("collection-count").get()
@@ -93,7 +93,7 @@ document.getElementById("create-document").addEventListener("click", (event) => 
         if (Object.keys(docData).length === 0 && docData.constructor === Object) {
           collectionDB.doc("collection-count")
             .set({
-              "Number of collection": 0,
+              "Number of collection": 0
             })
             .then(() => {
               console.log("Document set successfully");
@@ -102,8 +102,10 @@ document.getElementById("create-document").addEventListener("click", (event) => 
               console.error("Error setting document:", error);
             });
         } else {
-          collection_counter = docSnapshot.get("Number of collection");
-          console.log(collection_counter);
+          // collection_counter += docSnapshot.get("Number of collection");
+          // collectionDB.doc("collection-count").set({
+          //   "Number of collection": collection_counter
+          // });
         }
       }
     })
@@ -117,7 +119,7 @@ document.getElementById("create-document").addEventListener("click", (event) => 
       if (!docSnapshot.exists){
         collectionDB.doc('collection-name')
         .set({
-          // TODO: Insert collection name
+          "Collection-0" : "0-collection"
         })
         .then(() =>{
           console.log("Collection 'collection-name' created successfully");
@@ -130,7 +132,7 @@ document.getElementById("create-document").addEventListener("click", (event) => 
         if (Object.keys(docData).length === 0 && docData.constructor === Object) {
           collectionDB.doc('collection-name')
           .set({
-            // TODO: Insert collection name
+            "Collection-0" : "0-collection"
           })
           .then(() =>{
             console.log("Document set successfully");

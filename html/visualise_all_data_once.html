@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualise Data</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <th>Questions</th>
+            <th>Answers</th>
+        </thead>
+        <tbody id="tbody1"></tbody>
+        <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-firestore.js"></script>
+        
+        <script id="MainScript">
+            const firebaseConfig = {
+                apiKey: "AIzaSyBXpx8bNix8yUzLTRu_P-_N5wdt3jllTuM",
+                authDomain: "statistics-1846f.firebaseapp.com",
+                databaseURL:
+                "https://statistics-1846f-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "statistics-1846f",
+                storageBucket: "statistics-1846f.appspot.com",
+                messagingSenderId: "168068170143",
+                appId: "1:168068170143:web:6676606706ba6b40f67daa",
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+
+            //get all data
+            function GetAllDataOnce(){
+                db.collection("user-inputs").get().then((querySnapshot)=>{
+                    var user_inputs = [];
+                    querySnapshot.forEach(doc =>{
+                        user_inputs.push(doc.data());
+                    });
+    
+                });
+            }
+
+            function GetAllDataRealtime(){
+                db.collection("user-inputs").onSnapshot((querySnapshot)=>{
+                    var user_inputs = [];
+                    querySnapshot.forEach(doc =>{
+                        user_inputs.push(doc.data());
+                    });
+                    AddItemToTable(user_inputs);
+                });
+            }
+
+            //filling the table
+            var usrInNo=0;
+            var tbody = document.getElementById('tbody1');
+
+            function AddItemToTable(question, answer){
+                var trow = document.createElement('tr');
+                var td1 = document.createElement('td');
+                var td2 = document.createElement('td');
+
+                td1.innnerHTML =  question;
+                td2.innerHTML = answer;
+
+                trow.appendChild(td1);
+                trow.appendChild(td2);
+
+                tbody.appendChild(trow);
+            };
+
+            function AddAllitemsToTheTable(user_inputDocsList){
+                tbody.inner.HTML="";
+                user_inputDocsList.forEach(element => {
+                    AddItemToTable(element.question,element.answer); //parameters based on what the form headers are in firestore, since each form has different questions not possible
+                });
+            };
+            window.onload = GetAllDataOnce;
+        </script>
+    </table>
+</body>
+</html>

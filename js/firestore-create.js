@@ -54,7 +54,7 @@ document.getElementById("create-document").addEventListener("click", (event) => 
   }
 
   // ! get(input_values)
-  const documentName = documentNameInput.value.trim() + "-questionaire";
+  const documentName = documentNameInput.value.trim();
 
   // ! Create an object; Holding each's field and value
   const fields = {};

@@ -1,27 +1,65 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Document in Firebase Firestore</title>
+    <style>
+        /* Styling for input type=text */
+        input[type=text], select {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+
+        /* Styling for input type=button & type= submit */
+        input[type=button], input[type=submit] {
+          width: 100%;
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        /* Styling for when hover over button and submit input */
+        input[type=button]:hover, input[type=submit]:hover {
+          background-color: #45a049;
+        }
+
+        /* Styling for contents inside div */
+        div {
+          border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 20px;
+        }
+    </style>
 </head>
-
 <body>
-    <h1>Create Document in Firebase Firestore</h1>
-    <form>
-        <label for="document-name">Form Name:</label>
-        <input type="text" id="document-name" name="document-name">
-        <br><br>
-        <button type="button" id="add-field">Add Field</button>
-        <br><br>
-        <button type="submit" id="create-document">Create Document</button>
-        <br><br>
-        <button type="button" id="enter-view">View Created Documents</button>
-        <br><br>
-    </form>
+    <h3>Create Document in Firebase Firestore</h3>
 
-    <script type="module" src="/js/firestore-create.js"></script>
+    <div>
+        <form action="/action_page.php">
+            <label for="document-name">Form Name</label>
+            <input type="text" id="document-name" name="document-name" placeholder="Form name..">
+            
+            <input type="button" id="add-field" value="Add Field">
+            
+            <input type="submit" id="create-document" value="Create Document">
+    
+            <input type="button" id="enter-view" value="View Created Documents">
+            
+            <input type="submit" value="Submit">
 
+            <script type="module" src="/js/firestore-create.js"></script>
+        </form>
+    </div>
 </body>
-
 </html>

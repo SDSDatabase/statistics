@@ -5,22 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/index.css">
-    <title>Create Document in Firebase Firestore</title>
+    <title>Create Questionaires</title>
     
 </head>
 <body>
-    <h3>Create Document in Firebase Firestore</h3>
+    <h1>Create your questions below!</h1>
 
     <div>
-        <form action="/action_page.php">
-            <label for="document-name">Form Name</label>
-            <input type="text" id="document-name" name="document-name" placeholder="Form name..">
+        <form>
+            <label class="document-name" for="document-name">Form Name:</label>
+            <input type="text" id="document-name" name="document-name" style="font-style: italic;" placeholder="Enter your form name here!">
             
             <input type="button" id="add-field" value="Add Field">
             
             <input type="submit" id="create-document" value="Create Document">
-    
-            <input type="submit" value="Submit">
             
             <input type="button" id="enter-view" value="View Created Documents">
             

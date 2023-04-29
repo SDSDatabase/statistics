@@ -13,11 +13,6 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-function MoveToView(){
-  
-}
-
-
 // ! getReference(fireStore_database)
 const db = firebase.firestore();
 
@@ -54,7 +49,7 @@ document.getElementById("create-document").addEventListener("click", (event) => 
 
   // ! !isEmpty(input_values)
   if (documentNameInput.value === "") {
-    alert("Please enter a collection name and document name");
+    alert("Please enter a proper form name!");
     return;
   }
 

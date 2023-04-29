@@ -1,0 +1,45 @@
+/* ! Selection Styling */
+select {
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+/* ! Input Button Styling */
+/* * Input Button Starts */
+input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    margin-top: 20px;
+}
+
+/* Styling for when hover over submit input */
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+/* * Input Button Ends */
+
+.question-div{
+    display: grid;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.question-label{
+    font-size: 20px;
+}
+
+.answer-input-field{
+    padding: 10px;
+    border-radius: 20px;
+}

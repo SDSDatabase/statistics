@@ -45,13 +45,19 @@ selectElement.addEventListener("change", (event) => {
       const form = document.createElement("form");
 
       Object.keys(data).forEach((key) => {
+        const question_div = document.createElement('div');
+        question_div.classList = "question-div";
         const label = document.createElement("label");
+        label.classList = "question-label";
         label.textContent = `${key}: `;
         const input = document.createElement("input");
+        input.classList = "answer-input-field";
         input.type = "text";
         input.name = key;
-        form.appendChild(label);
-        form.appendChild(input);
+
+        question_div.appendChild(label);
+        question_div.appendChild(input);
+        form.appendChild(question_div);
       });
 
       formContainer.appendChild(form);

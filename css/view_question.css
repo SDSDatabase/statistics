@@ -18,6 +18,8 @@ input[type=submit] {
     cursor: pointer;
     float: right;
     margin-top: 20px;
+    margin-left: 20px;
+    width: 20%;
 }
 
 /* Styling for when hover over submit input */

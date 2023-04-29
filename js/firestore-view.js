@@ -82,3 +82,7 @@ selectElement.addEventListener("change", (event) => {
       console.log("Error getting documents: ", error);
     });
 });
+
+document.getElementById("enter-question-view").addEventListener("click", () => {
+  window.location.href = "../index.html";
+});

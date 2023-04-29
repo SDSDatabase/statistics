@@ -7,45 +7,18 @@
     <link rel="stylesheet" href="/css/view_question.css">
     <title>Form Viewer</title>
 
-    <!-- <style>
-        /* Styling for select */
-        select {
-            width: 100%;
-            padding: 16px 20px;
-            border: none;
-            border-radius: 4px;
-            background-color: #f1f1f1;
-        }
-
-        /* Styling for submit input */
-        input[type=submit] {
-            background-color: #04AA6D;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            float: right;
-        }
-
-        /* Styling for when hover over submit input */
-        input[type=submit]:hover {
-            background-color: #45a049;
-        }
-    </style> -->
 </head>
 <body>
     <h2>Available Forms</h2>
     <p>Please select from below the form you wish to use!</p>
+    <select name="firestore-collection-dd" id="firestore-collection-dd">
+        <option value="">Select a collection</option>
+    </select>
 
-    <form>
-        <select name="firestore-collection-dd" id="firestore-collection-dd">
-            <option value="">Select a collection</option>
-        </select>
+    <div id="form-container"></div>
 
-        <input type="submit" value="Submit">
+    <input type="submit" id="submit-btn" value="Submit">
 
-        <script type="module" src="/js/firestore-view.js"></script>
-    </form>
+    <script type="module" src="/js/firestore-view.js"></script>
 </body>
 </html>

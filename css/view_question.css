@@ -17,6 +17,7 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
     float: right;
+    margin-top: 20px;
 }
 
 /* Styling for when hover over submit input */
@@ -25,3 +26,16 @@ input[type=submit]:hover {
 }
 
 /* * Input Button Ends */
+
+.question-div{
+    display: grid;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.question-label{
+    font-size: 20px;
+
+}

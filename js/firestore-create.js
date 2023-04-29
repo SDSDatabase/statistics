@@ -13,6 +13,11 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
+function MoveToView(){
+  
+}
+
+
 // ! getReference(fireStore_database)
 const db = firebase.firestore();
 
@@ -76,4 +81,9 @@ document.getElementById("create-document").addEventListener("click", (event) => 
     .catch((error) => {
       console.error("Error adding document to collection: ", error);
     });
+});
+
+
+document.getElementById("enter-view").addEventListener("click", ()=> {
+  window.location.href = "/html/view_questions.html";
 });

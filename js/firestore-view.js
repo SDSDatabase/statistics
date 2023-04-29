@@ -68,9 +68,7 @@ selectElement.addEventListener("change", (event) => {
         const formData = new FormData(form);
         const formObject = Object.fromEntries(formData);
 
-        db.collection("generated-questions")
-          .doc(selectedForm)
-          .collection("user-inputs")
+        db.collection("generated-questions").doc(selectedForm).collection("user-inputs")
           .add(formObject)
           .then(() => {
             console.log("Form submitted successfully!");

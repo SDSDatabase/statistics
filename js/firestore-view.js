@@ -19,7 +19,7 @@ const formContainer = document.getElementById("form-container");
 const submitBtn = document.getElementById("submit-btn");
 
 // Populate select element with document IDs
-db.collection("AAA-collection")
+db.collection("generated-questions")
   .get()
   .then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
@@ -35,13 +35,15 @@ db.collection("AAA-collection")
 
 selectElement.addEventListener("change", (event) => {
   const selectedForm = event.target.value;
-  db.collection("AAA-collection")
+  db.collection("generated-questions")
     .doc(selectedForm)
     .get()
     .then((doc) => {
+
       const data = doc.data();
       formContainer.innerHTML = "";
       const form = document.createElement("form");
+
       Object.keys(data).forEach((key) => {
         const label = document.createElement("label");
         label.textContent = `${key}: `;
@@ -51,12 +53,16 @@ selectElement.addEventListener("change", (event) => {
         form.appendChild(label);
         form.appendChild(input);
       });
+
       formContainer.appendChild(form);
+
       submitBtn.addEventListener("click", (event) => {
+
         event.preventDefault();
         const formData = new FormData(form);
         const formObject = Object.fromEntries(formData);
-        db.collection("AAA-collection")
+        
+        db.collection("generated-questions")
           .doc(selectedForm)
           .collection("user-inputs")
           .add(formObject)

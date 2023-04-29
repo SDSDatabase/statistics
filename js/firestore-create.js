@@ -17,7 +17,6 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 // ! getReferences(form_elements)
-// const collectionNameInput = document.getElementById("collection-name");
 const documentNameInput = document.getElementById("document-name");
 const form = document.querySelector("form");
 const addFieldButton = document.getElementById("add-field");
@@ -55,9 +54,7 @@ document.getElementById("create-document").addEventListener("click", (event) => 
   }
 
   // ! get(input_values)
-  // const collectionName = collectionNameInput.value.trim() + "-collection";
   const documentName = documentNameInput.value.trim() + "-questionaire";
-
 
   // ! Create an object; Holding each's field and value
   const fields = {};

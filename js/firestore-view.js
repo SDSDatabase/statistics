@@ -46,8 +46,10 @@ selectElement.addEventListener("change", (event) => {
 
       Object.keys(data).forEach((key) => {
         const label = document.createElement("label");
+        label.classList = "question-label";
         label.textContent = `${key}: `;
         const input = document.createElement("input");
+        input.classList = "answer-label";
         input.type = "text";
         input.name = key;
         form.appendChild(label);

@@ -76,14 +76,12 @@ document.getElementById("create-document").addEventListener("click", (event) => 
   db.collection('generated-questions').doc(documentName)
     .set(fields)
     .then(() => {
-      alert("Questionaire added successfully!");
       console.log("Document added to collection successfully");
     })
     .catch((error) => {
       console.error("Error adding document to collection: ", error);
     });
-});
-
+  });
 
 document.getElementById("enter-view").addEventListener("click", ()=> {
   window.location.href = "/html/view_questions.html";

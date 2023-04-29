@@ -67,7 +67,6 @@ selectElement.addEventListener("change", (event) => {
           .collection("user-inputs")
           .add(formObject)
           .then(() => {
-            alert("Submission Successful!");
             console.log("Form submitted successfully!");
           })
           .catch((error) => {

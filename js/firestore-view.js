@@ -51,7 +51,7 @@ selectElement.addEventListener("change", (event) => {
         label.classList = "question-label";
         label.textContent = `${key}: `;
         const input = document.createElement("input");
-        input.classList = "answer-label";
+        input.classList = "answer-input-field";
         input.type = "text";
         input.name = key;
 

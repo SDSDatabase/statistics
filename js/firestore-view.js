@@ -61,12 +61,13 @@ selectElement.addEventListener("change", (event) => {
         event.preventDefault();
         const formData = new FormData(form);
         const formObject = Object.fromEntries(formData);
-        
+
         db.collection("generated-questions")
           .doc(selectedForm)
           .collection("user-inputs")
           .add(formObject)
           .then(() => {
+            alert("Submission Successful!");
             console.log("Form submitted successfully!");
           })
           .catch((error) => {

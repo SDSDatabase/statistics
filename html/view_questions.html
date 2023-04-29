@@ -1,24 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Viewer</title>
+
+    <style>
+        /* Styling for select */
+        select {
+            width: 100%;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #f1f1f1;
+        }
+
+        /* Styling for submit input */
+        input[type=submit] {
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+        /* Styling for when hover over submit input */
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
-
 <body>
-    <h1>Available Forms</h1>
-    <h2>Please select from below the form you wish to use!</h2>
-    <select name="firestore-collection-dd" id="firestore-collection-dd">
-        <option value="">Select a form</option>
-    </select>
-    <div id="form-container"></div>
-    <button id="submit-btn">Submit</button>
+    <h2>Available Forms</h2>
+    <p>Please select from below the form you wish to use!</p>
 
+    <form>
+        <select name="firestore-collection-dd" id="firestore-collection-dd">
+            <option value="">Select a collection</option>
+        </select>
 
-    <script type="module" src="/js/firestore-view.js"></script>
+        <input type="submit" value="Submit">
+
+        <script type="module" src="/js/firestore-view.js"></script>
+    </form>
 </body>
-
 </html>
